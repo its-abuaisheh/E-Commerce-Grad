@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\laith\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\laith\\.nuget\\packages"
+    ]
+  }
+}
