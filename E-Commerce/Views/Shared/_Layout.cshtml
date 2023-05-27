@@ -32,10 +32,9 @@
         <div class="row bg-secondary py-1 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="">About</a>
-                    <a class="text-body mr-3" href="">Contact</a>
-                    <a class="text-body mr-3" href="">Help</a>
-                    <a class="text-body mr-3" href="">FAQs</a>
+                    <a class="text-body mr-3" href="">About(Soon)</a>
+                    <a class="text-body mr-3" href="/Home/Contact">Contact</a>
+                    <a class="text-body mr-3" href="">Help (Soon)</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
@@ -43,8 +42,16 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">Sign in</button>
-                            <button class="dropdown-item" type="button">Sign up</button>
+                            
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <span>Welcome @User.Identity.Name</span>
+                                <a class="dropdown-item" asp-action="Logout" asp-controller="Accounts" type="button">Sign out</a>
+                            }
+                            else{
+                                <a class="dropdown-item" asp-action="Login" asp-controller="Accounts" type="button">Sign in</a>
+                                <a class="dropdown-item" asp-action="Regesters" asp-controller="Accounts" type="button">Sign up</a>
+                            }                            
                         </div>
                     </div>
                     <div class="btn-group mx-2">
@@ -84,9 +91,9 @@
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-                <form action="">
+                <form asp-action="Search" method="post">                
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" name="productName" class="form-control" placeholder="Search for products">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -97,7 +104,7 @@
             </div>
             <div class="col-lg-4 col-6 text-right">
                 <p class="m-0">Customer Service</p>
-                <h5 class="m-0">+012 345 6789</h5>
+                <h5 class="m-0">+962777616256</h5>
             </div>
         </div>
     </div>
@@ -145,8 +152,8 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a asp-action="Index" asp-controller="Home" class="nav-item nav-link active">Home</a>
                             <a asp-action="Product" asp-controller="Home" class="nav-item nav-link">Products</a>
-                            <a asp-action="ShoppingCart" asp-controller="Home" class="nav-item nav-link">Shopping Cart</a>
-                            <a asp-action="Contact" asp-controller="Home" class="nav-item nav-link">Contact</a>
+                            <a asp-action="Cart" asp-controller="Carts" class="nav-item nav-link">Shopping Cart</a>
+                            <a asp-action="Contact" asp-controllr="Home" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">

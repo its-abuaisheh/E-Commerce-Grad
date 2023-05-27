@@ -71,7 +71,9 @@ namespace E_Commerce.Migrations
             modelBuilder.Entity("E_Commerce.Models.Product", b =>
                 {
                     b.Property<int>("ProductID")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
@@ -325,14 +327,8 @@ namespace E_Commerce.Migrations
             modelBuilder.Entity("E_Commerce.Models.Product", b =>
                 {
                     b.HasOne("E_Commerce.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("E_Commerce.Models.Category", null)
                         .WithMany("Product")
-                        .HasForeignKey("ProductID")
+                        .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -14,7 +14,7 @@ namespace E_Commerce.Models
 
         public int Quantity { get; set; }
         [Range(1,int.MaxValue, ErrorMessage = "Quantity must be greater than or equal 1")]
-        public string? UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
     }
