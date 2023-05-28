@@ -59,7 +59,7 @@ namespace E_Commerce.Controllers
 
         public IActionResult ProductList(int id)
         {
-            var products = _context.Products.Where(c=>c.CategoryID==id).ToList();
+            var products = _context.Products.Where(c => c.CategoryID == id).ToList();
             return View(products);
         }
 
