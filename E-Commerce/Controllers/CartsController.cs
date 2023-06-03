@@ -21,6 +21,7 @@ namespace E_Commerce.Controllers
 
         public async Task<IActionResult> Cart()
         {
+            ViewBag.category = _context.Categories.ToList();
             var user = await _userManager.GetUserAsync(User);
             var result = _context.ShoppingCarts.Include(p => p.Product).Where(u => u.UserId == user.Id).ToList();
             return View(result);
@@ -29,6 +30,7 @@ namespace E_Commerce.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToCart(ShoppingCart shoppingCart, int quantity) 
         {
+            ViewBag.category = _context.Categories.ToList();
             var product = _context.Products.FirstOrDefault(p => p.ProductID == shoppingCart.ProductID);
             var user = await _userManager.GetUserAsync(User);
             var cart = new ShoppingCart
@@ -59,6 +61,7 @@ namespace E_Commerce.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveItem(int id)
         {
+            ViewBag.category = _context.Categories.ToList();
             var user = await _userManager.GetUserAsync(User);
             var shop = _context.ShoppingCarts.FirstOrDefault(u => u.UserId == user.Id && u.CartID == id);
             if (shop != null)

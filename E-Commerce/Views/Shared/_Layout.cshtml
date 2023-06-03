@@ -1,5 +1,4 @@
-﻿@model IndexVM
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -120,7 +119,7 @@
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
-                        @foreach (var category in Model.Categories)
+                        @foreach (var category in @ViewBag.category)
                         {
                             <a href="/Home/ProductList/@category.CategoryID" class="nav-item nav-link">@category.CategoryName</a>
                         }

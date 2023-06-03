@@ -1,8 +1,11 @@
-﻿using E_Commerce.Models;
+﻿using E_Commerce.Data;
+using E_Commerce.Models;
 using E_Commerce.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace E_Commerce.Controllers
@@ -11,21 +14,25 @@ namespace E_Commerce.Controllers
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly EcommerceContext _context;
 
-        public AccountsController(SignInManager<User> signInManager, UserManager<User> userManager)
+        public AccountsController(SignInManager<User> signInManager, UserManager<User> userManager, EcommerceContext context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _context = context;
         }
 
         public IActionResult Login()
         {
+            ViewBag.category = _context.Categories.ToList();
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM login)
         {
+            ViewBag.category = _context.Categories.ToList();
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
@@ -42,12 +49,14 @@ namespace E_Commerce.Controllers
         }
         public IActionResult Regesters()
         {
+            ViewBag.category = _context.Categories.ToList();
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Regesters(RegesterVM regester)
         {
+            ViewBag.category = _context.Categories.ToList();
             if (ModelState.IsValid)
             {
                 var user = new User
